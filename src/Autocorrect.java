@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Autocorrect
@@ -21,38 +22,34 @@ private int threshold;
     public Autocorrect(String[] words, int threshold) {
         dict = words;
         this.threshold = threshold;
+
     }
 
     public int getEditDistance(String typed, String dictWord){
-        return getInsertions(typed, dictWord) + getRemovals(typed, dictWord) + getSwaps(typed, dictWord);
-    }
-
-    private int getSwaps(String typed, String dictWord) {
-
-    }
-
-    private int getRemovals(String typed, String dictWord) {
-        int j;
-        /*
-            represents number of characters in typed but not in dictword.
-         */
-        int returnVal = 0;
-        for(int i = 0; i < typed.length(); i++){
-            for(j = 0; j < dictWord.length(); j++){
-                if(typed.charAt(i) == dictWord.charAt(j)){
-                    break;
-                }
-            }
-            if(j == dictWord.length()){
-                returnVal++;
+        char[][] editDistanceTable = new char[typed.length() + 1][dictWord.length() + 1];
+        editDistanceTable[1][0] = ' ';
+        editDistanceTable[0][1] = ' ';
+        for(int i = 1; i < typed.length(); i++){
+            editDistanceTable[i + 1][0] = typed.charAt(i);
+        }
+        for(int j = 1; j < dictWord.length(); j++){
+            editDistanceTable[0][j + 1] = dictWord.charAt(j);
+        }
+        for(int i = 1; i < typed.length() + 1; i++){
+            for(int j = 1; j < dictWord.length(); j++){
+                editDistanceTable[i][j] = getRecurseEditDistance(i, j, typed, dictWord, editDistanceTable);
             }
         }
-        return returnVal;
+        return editDistanceTable[typed.length() + 1][dictWord.length() + 1];
     }
 
-    private int getInsertions(String typed, String dictWord) {
-
+    public char getRecurseEditDistance(int i, int j, String typed, String dictWord, char[][] editDistanceTable){
+        if(typed.charAt(i) == typed.charAt(j)){
+            return editDistanceTable[i - 1][j - 1];
+        }
+        return (char) Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);
     }
+
 
 
     /**
@@ -62,7 +59,17 @@ private int threshold;
      * to threshold, sorted by edit distnace, then sorted alphabetically.
      */
     public String[] runTest(String typed) {
-
+        ArrayList<String> returnWords = new ArrayList<String>();
+        String[] finalReturnedArr = new String[0];
+        for(int i = 0; i < dict.length; i++){
+            if(getEditDistance(typed, dict[i]) <= threshold){
+                returnWords.add(dict[i]);
+            }
+        }
+        //Sort Arraylist by edit distance.
+        //Sort arraylist alphabetically.
+        //convert it to an array and return
+        return finalReturnedArr;
     }
 
 

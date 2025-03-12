@@ -11,18 +11,47 @@ import java.io.IOException;
  * @author Agastya Brahmbhatt
  */
 public class Autocorrect {
-
+private String[] dict;
+private int threshold;
     /**
      * Constucts an instance of the Autocorrect class.
      * @param words The dictionary of acceptable words.
      * @param threshold The maximum number of edits a suggestion can have.
      */
     public Autocorrect(String[] words, int threshold) {
+        dict = words;
+        this.threshold = threshold;
+    }
+
+    public int getEditDistance(String typed, String dictWord){
+        return getInsertions(typed, dictWord) + getRemovals(typed, dictWord) + getSwaps(typed, dictWord);
+    }
+
+    private int getSwaps(String typed, String dictWord) {
 
     }
 
-    public int getEditDistance(String word1, String word2){
-        return 0;
+    private int getRemovals(String typed, String dictWord) {
+        int j;
+        /*
+            represents number of characters in typed but not in dictword.
+         */
+        int returnVal = 0;
+        for(int i = 0; i < typed.length(); i++){
+            for(j = 0; j < dictWord.length(); j++){
+                if(typed.charAt(i) == dictWord.charAt(j)){
+                    break;
+                }
+            }
+            if(j == dictWord.length()){
+                returnVal++;
+            }
+        }
+        return returnVal;
+    }
+
+    private int getInsertions(String typed, String dictWord) {
+
     }
 
 
@@ -33,8 +62,7 @@ public class Autocorrect {
      * to threshold, sorted by edit distnace, then sorted alphabetically.
      */
     public String[] runTest(String typed) {
-        String[] potentialWords;
-        return new String[0];
+
     }
 
 

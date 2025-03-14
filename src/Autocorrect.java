@@ -77,10 +77,14 @@ private int threshold;
         for(int i = 0; i < threshold; i++){
             Collections.sort(editDistanceArr[i]);
         }
-        //Sort Arraylist by edit distance.
-        //Sort arraylist alphabetically.
-        //convert it to an array and return
-        return finalReturnedArr;
+        ArrayList<String> finalReturned = new ArrayList<String>();
+        for(int i = 0; i < threshold; i++){
+            for(int j = 0; j < editDistanceArr[i].size(); i++){
+                finalReturned.add(editDistanceArr[i].get(j));
+            }
+        }
+        //converts it to an array and return
+        return (String[]) finalReturned.toArray();
     }
 
 

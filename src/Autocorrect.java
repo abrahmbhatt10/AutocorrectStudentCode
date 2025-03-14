@@ -85,6 +85,7 @@ private int threshold;
             sortedReturnWords.add(returnWords.get(indexofMinEditDistance));
             returnWords.remove(indexofMinEditDistance);
         }
+
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.
         //convert it to an array and return

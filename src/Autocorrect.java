@@ -70,8 +70,9 @@ private int threshold;
                 editDistanceArr[currentEditDistance].add(dict[i]);
             }
         }
+        // I learned how to sort an arraylist alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
         for(int i = 0; i < threshold; i++){
-
+            editDistanceArr[i].sort();
         }
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.

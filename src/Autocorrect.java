@@ -59,35 +59,17 @@ private int threshold;
      * to threshold, sorted by edit distnace, then sorted alphabetically.
      */
     public String[] runTest(String typed) {
-        ArrayList<String> returnWords = new ArrayList<String>();
-        ArrayList<Integer> editDistances = new ArrayList<Integer>();
         // I learned how to declare an array of arraylists from https://www.geeksforgeeks.org/array-of-arraylist-in-java/
-        ArrayList<String>[] editDistanceArr = new ArrayList[];
+        ArrayList<String>[] editDistanceArr = new ArrayList[threshold];
         int currentEditDistance = 0;
         String[] finalReturnedArr = new String[0];
         // Adds dict words below threshold and edit distances to their arraylists.
         for(int i = 0; i < dict.length; i++){
             currentEditDistance = getEditDistance(typed, dict[i]);
             if(currentEditDistance <= threshold){
-                returnWords.add(dict[i]);
-                editDistances.add(currentEditDistance);
+                editDistanceArr[currentEditDistance].add(dict[i]);
             }
         }
-        //
-        ArrayList<String> sortedReturnWords = new ArrayList<String>();
-        while(sortedReturnWords.size() != returnWords.size()) {
-            int minEditDistance = 1000000000;
-            int indexofMinEditDistance = 0;
-            for (int i = 0; i < returnWords.size(); i++) {
-                if (editDistances.get(i) < minEditDistance) {
-                    minEditDistance = editDistances.get(i);
-                    indexofMinEditDistance = i;
-                }
-            }
-            sortedReturnWords.add(returnWords.get(indexofMinEditDistance));
-            returnWords.remove(indexofMinEditDistance);
-        }
-
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.
         //convert it to an array and return

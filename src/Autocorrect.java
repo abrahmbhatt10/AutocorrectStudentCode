@@ -70,6 +70,9 @@ private int threshold;
                 editDistanceArr[currentEditDistance].add(dict[i]);
             }
         }
+        for(int i = 0; i < threshold; i++){
+
+        }
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.
         //convert it to an array and return

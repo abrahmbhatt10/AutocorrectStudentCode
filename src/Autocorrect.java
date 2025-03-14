@@ -61,6 +61,8 @@ private int threshold;
     public String[] runTest(String typed) {
         ArrayList<String> returnWords = new ArrayList<String>();
         ArrayList<Integer> editDistances = new ArrayList<Integer>();
+        // I learned how to declare an array of arraylists from https://www.geeksforgeeks.org/array-of-arraylist-in-java/
+        ArrayList<String>[] editDistanceArr = new ArrayList[];
         int currentEditDistance = 0;
         String[] finalReturnedArr = new String[0];
         // Adds dict words below threshold and edit distances to their arraylists.
@@ -73,11 +75,11 @@ private int threshold;
         }
         //
         ArrayList<String> sortedReturnWords = new ArrayList<String>();
-        while(sortedReturnWords.size() != returnWords.size()){
+        while(sortedReturnWords.size() != returnWords.size()) {
             int minEditDistance = 1000000000;
             int indexofMinEditDistance = 0;
-            for(int i = 0; i < returnWords.size(); i++){
-                if(editDistances.get(i) < minEditDistance){
+            for (int i = 0; i < returnWords.size(); i++) {
+                if (editDistances.get(i) < minEditDistance) {
                     minEditDistance = editDistances.get(i);
                     indexofMinEditDistance = i;
                 }

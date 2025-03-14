@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+// I learned about how to sort arraylists alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
+// To do so, I had to import the collections class.
+import java.util.Collections;
 
 /**
  * Autocorrect
@@ -72,7 +75,7 @@ private int threshold;
         }
         // I learned how to sort an arraylist alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
         for(int i = 0; i < threshold; i++){
-            editDistanceArr[i].sort();
+            Collections.sort(editDistanceArr[i]);
         }
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.

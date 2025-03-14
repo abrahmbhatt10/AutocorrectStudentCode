@@ -60,11 +60,30 @@ private int threshold;
      */
     public String[] runTest(String typed) {
         ArrayList<String> returnWords = new ArrayList<String>();
+        ArrayList<Integer> editDistances = new ArrayList<Integer>();
+        int currentEditDistance = 0;
         String[] finalReturnedArr = new String[0];
+        // Adds dict words below threshold and edit distances to their arraylists.
         for(int i = 0; i < dict.length; i++){
-            if(getEditDistance(typed, dict[i]) <= threshold){
+            currentEditDistance = getEditDistance(typed, dict[i]);
+            if(currentEditDistance <= threshold){
                 returnWords.add(dict[i]);
+                editDistances.add(currentEditDistance);
             }
+        }
+        //
+        ArrayList<String> sortedReturnWords = new ArrayList<String>();
+        while(sortedReturnWords.size() != returnWords.size()){
+            int minEditDistance = 1000000000;
+            int indexofMinEditDistance = 0;
+            for(int i = 0; i < returnWords.size(); i++){
+                if(editDistances.get(i) < minEditDistance){
+                    minEditDistance = editDistances.get(i);
+                    indexofMinEditDistance = i;
+                }
+            }
+            sortedReturnWords.add(returnWords.get(indexofMinEditDistance));
+            returnWords.remove(indexofMinEditDistance);
         }
         //Sort Arraylist by edit distance.
         //Sort arraylist alphabetically.

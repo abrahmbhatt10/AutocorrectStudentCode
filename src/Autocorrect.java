@@ -29,24 +29,30 @@ private int threshold;
     }
 
     public int getEditDistance(String typed, String dictWord){
-        char[][] editDistanceTable = new char[typed.length() + 1][dictWord.length() + 1];
+        char[][] editDistanceTable = new char[typed.length() + 2][dictWord.length() + 2];
         editDistanceTable[1][0] = ' ';
         editDistanceTable[0][1] = ' ';
-        for(int i = 1; i < typed.length(); i++){
-            editDistanceTable[i + 1][0] = typed.charAt(i);
+        for(int i = 0; i < typed.length(); i++){
+            editDistanceTable[i + 2][0] = typed.charAt(i);
         }
-        for(int j = 1; j < dictWord.length(); j++){
-            editDistanceTable[0][j + 1] = dictWord.charAt(j);
+        for(int j = 0; j < dictWord.length(); j++){
+            editDistanceTable[0][j + 2] = dictWord.charAt(j);
         }
-        for(int i = 1; i < typed.length() + 1; i++){
-            for(int j = 1; j < dictWord.length(); j++){
+        for(int i = 1; i < typed.length() + 2; i++){
+            for(int j = 1; j < dictWord.length() + 2; j++){
                 editDistanceTable[i][j] = getRecurseEditDistance(i, j, typed, dictWord, editDistanceTable);
             }
         }
-        return editDistanceTable[typed.length() + 1][dictWord.length() + 1];
+        return editDistanceTable[typed.length() + 2][dictWord.length() + 2];
     }
 
     public char getRecurseEditDistance(int i, int j, String typed, String dictWord, char[][] editDistanceTable){
+        if(typed == " "){
+            return (char) dictWord.length();
+        }
+        else if (dictWord == " "){
+            return (char) typed.length();
+        }
         if(typed.charAt(i) == typed.charAt(j)){
             return editDistanceTable[i - 1][j - 1];
         }

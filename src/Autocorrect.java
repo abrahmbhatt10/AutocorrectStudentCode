@@ -32,6 +32,7 @@ private int threshold;
         int[][] editDistanceTable = new int[typed.length() + 1][dictWord.length() + 1];
         char[] typedChar = new char[typed.length() + 1];
         char[] dictWordChar = new char[dictWord.length() + 1];
+        // I figured out how to do below line from stackoverflow.com "How to represent empty char in java character class"
         typedChar[0] = '\0';
         for(int i = 0; i < typed.length(); i++){
             typedChar[i + 1] = typed.charAt(i);
@@ -40,32 +41,26 @@ private int threshold;
         for(int i = 0; i < dictWord.length(); i++){
             dictWordChar[i + 1] = dictWord.charAt(i);
         }
-        for(int i = 0; i < typed.length(); i++){
-            editDistanceTable[i + 2][0] = typed.charAt(i);
-        }
-        for(int j = 0; j < dictWord.length(); j++){
-            editDistanceTable[0][j + 2] = dictWord.charAt(j);
-        }
-        for(int i = 0; i < typed.length(); i++){
-            for(int j = 0; j < dictWord.length(); j++){
-                editDistanceTable[i][j] = getTabEditDistance(i, j, typed, dictWord, editDistanceTable);
+        for(int i = 0; i < editDistanceTable.length; i++){
+            for(int j = 0; j < editDistanceTable[0].length; j++){
+                editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[i], editDistanceTable);
             }
         }
-        return editDistanceTable[typed.length() + 2][dictWord.length() + 2];
+        return editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1];
     }
 
-    public int getTabEditDistance(int i, int j, String typed, String dictWord, int[][] editDistanceTable){
-        if((typed == "") && (dictWord == "")){
+    public int getTabEditDistance(int i, int j, char typedChar, char dictWordChar, int[][] editDistanceTable){
+        if((typedChar == '\0') && (dictWordChar == '\0')){
             return 0;
         }
-        else if (dictWord == ""){
-            return i + 1;
+        else if (dictWordChar == '\0'){
+            return i;
         }
-        else if (typed == ""){
-            return j + 1;
+        else if (typedChar == '\0'){
+            return j;
         }
-        else if(typed.charAt(i) == typed.charAt(j)){
-            return editDistanceTable[i][j];
+        else if(typedChar == dictWordChar){
+            return editDistanceTable[i - 1][j - 1];
         }
         else{
             return (char) Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);

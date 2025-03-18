@@ -32,11 +32,11 @@ private int threshold;
         int[][] editDistanceTable = new int[typed.length() + 1][dictWord.length() + 1];
         char[] typedChar = new char[typed.length() + 1];
         char[] dictWordChar = new char[dictWord.length() + 1];
-        typedChar[0] = '';
+        typedChar[0] = '\0';
         for(int i = 0; i < typed.length(); i++){
             typedChar[i + 1] = typed.charAt(i);
         }
-        dictWordChar[0] = '';
+        dictWordChar[0] = '\0';
         for(int i = 0; i < dictWord.length(); i++){
             dictWordChar[i + 1] = dictWord.charAt(i);
         }

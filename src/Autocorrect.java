@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 // I learned about how to sort arraylists alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
 // To do so, I had to import the collections class.
@@ -43,27 +44,28 @@ private int threshold;
         }
         for(int i = 0; i < editDistanceTable.length; i++){
             for(int j = 0; j < editDistanceTable[0].length; j++){
-                editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[i], editDistanceTable);
+                editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[j], editDistanceTable);
             }
         }
+        System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
         return editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1];
     }
 
     public int getTabEditDistance(int i, int j, char typedChar, char dictWordChar, int[][] editDistanceTable){
-        if((typedChar == '\0') && (dictWordChar == '\0')){
+        if((i == 0) && (j==0)){
             return 0;
         }
-        else if (dictWordChar == '\0'){
+        else if (j == 0){
             return i;
         }
-        else if (typedChar == '\0'){
+        else if (i == 0){
             return j;
         }
         else if(typedChar == dictWordChar){
             return editDistanceTable[i - 1][j - 1];
         }
         else{
-            return (char) Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);
+            return 1 + Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);
         }
     }
 
@@ -77,27 +79,35 @@ private int threshold;
      */
     public String[] runTest(String typed) {
         // I learned how to declare an array of arraylists from https://www.geeksforgeeks.org/array-of-arraylist-in-java/
-        ArrayList<String>[] editDistanceArr = new ArrayList[threshold];
+        ArrayList<String>[] editDistanceArr = new ArrayList[threshold+1];
         int currentEditDistance = 0;
         // Adds dict words below threshold and edit distances to their arraylists.
         for(int i = 0; i < dict.length; i++){
             currentEditDistance = getEditDistance(typed, dict[i]);
             if(currentEditDistance <= threshold){
+                if(editDistanceArr[currentEditDistance] == null) {
+                    editDistanceArr[currentEditDistance] = new ArrayList<String>();
+                }
                 editDistanceArr[currentEditDistance].add(dict[i]);
             }
         }
         // I learned how to sort an arraylist alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
-        for(int i = 0; i < threshold; i++){
-            Collections.sort(editDistanceArr[i]);
+        for(int i = 0; i < threshold+1; i++){
+            if(editDistanceArr[i] != null) {
+                Collections.sort(editDistanceArr[i]);
+            }
         }
         ArrayList<String> finalReturned = new ArrayList<String>();
-        for(int i = 0; i < threshold; i++){
-            for(int j = 0; j < editDistanceArr[i].size(); i++){
+        for(int i = 0; i < threshold+1; i++){
+            for(int j = 0; editDistanceArr[i] != null && j < editDistanceArr[i].size(); j++){
                 finalReturned.add(editDistanceArr[i].get(j));
             }
         }
+        System.out.println("threshold "+threshold);
+        System.out.println(finalReturned);
+        String[] retArr = finalReturned.toArray(new String[0]);
         //converts it to an array and return
-        return (String[]) finalReturned.toArray();
+        return retArr;
     }
 
 

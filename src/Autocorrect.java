@@ -79,7 +79,6 @@ private int threshold;
         // I learned how to declare an array of arraylists from https://www.geeksforgeeks.org/array-of-arraylist-in-java/
         ArrayList<String>[] editDistanceArr = new ArrayList[threshold];
         int currentEditDistance = 0;
-        String[] finalReturnedArr = new String[0];
         // Adds dict words below threshold and edit distances to their arraylists.
         for(int i = 0; i < dict.length; i++){
             currentEditDistance = getEditDistance(typed, dict[i]);

@@ -29,34 +29,47 @@ private int threshold;
     }
 
     public int getEditDistance(String typed, String dictWord){
-        char[][] editDistanceTable = new char[typed.length() + 2][dictWord.length() + 2];
-        editDistanceTable[1][0] = ' ';
-        editDistanceTable[0][1] = ' ';
+        int[][] editDistanceTable = new int[typed.length() + 1][dictWord.length() + 1];
+        char[] typedChar = new char[typed.length() + 1];
+        char[] dictWordChar = new char[dictWord.length() + 1];
+        typedChar[0] = '';
+        for(int i = 0; i < typed.length(); i++){
+            typedChar[i + 1] = typed.charAt(i);
+        }
+        dictWordChar[0] = '';
+        for(int i = 0; i < dictWord.length(); i++){
+            dictWordChar[i + 1] = dictWord.charAt(i);
+        }
         for(int i = 0; i < typed.length(); i++){
             editDistanceTable[i + 2][0] = typed.charAt(i);
         }
         for(int j = 0; j < dictWord.length(); j++){
             editDistanceTable[0][j + 2] = dictWord.charAt(j);
         }
-        for(int i = 1; i < typed.length() + 2; i++){
-            for(int j = 1; j < dictWord.length() + 2; j++){
-                editDistanceTable[i][j] = getRecurseEditDistance(i, j, typed, dictWord, editDistanceTable);
+        for(int i = 0; i < typed.length(); i++){
+            for(int j = 0; j < dictWord.length(); j++){
+                editDistanceTable[i][j] = getTabEditDistance(i, j, typed, dictWord, editDistanceTable);
             }
         }
         return editDistanceTable[typed.length() + 2][dictWord.length() + 2];
     }
 
-    public char getRecurseEditDistance(int i, int j, String typed, String dictWord, char[][] editDistanceTable){
-        if(typed == " "){
-            return (char) dictWord.length();
+    public int getTabEditDistance(int i, int j, String typed, String dictWord, int[][] editDistanceTable){
+        if((typed == "") && (dictWord == "")){
+            return 0;
         }
-        else if (dictWord == " "){
-            return (char) typed.length();
+        else if (dictWord == ""){
+            return i + 1;
         }
-        if(typed.charAt(i) == typed.charAt(j)){
-            return editDistanceTable[i - 1][j - 1];
+        else if (typed == ""){
+            return j + 1;
         }
-        return (char) Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);
+        else if(typed.charAt(i) == typed.charAt(j)){
+            return editDistanceTable[i][j];
+        }
+        else{
+            return (char) Math.min(Math.min(editDistanceTable[i - 1][j], editDistanceTable[i][j - 1]), editDistanceTable[i - 1][j - 1]);
+        }
     }
 
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 // I learned about how to sort arraylists alphabetically from https://stackoverflow.com/questions/5815423/sorting-arraylist-in-alphabetical-order-case-insensitive
 // To do so, I had to import the collections class.
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * Autocorrect
@@ -39,23 +40,12 @@ private int threshold;
         typedChar = typed.toCharArray();
         dictWordChar = dictWord.toCharArray();
         // Below fills up the 2-d array edit distance table.
-        int i;
-        int j;
-        boolean breakFlag = false;
-        for(i = 0; i < editDistanceTable.length; i++){
-            for(j = 0; j < editDistanceTable[0].length; j++){
-                if((j > 0) && (i > 0) && (editDistanceTable[i][j - 1] > threshold) && (editDistanceTable[i - 1][j] > threshold) && (editDistanceTable[i - 1][j - 1] > threshold)){
-                    breakFlag = true;
-                    break;
-                }
+        for(int i = 0; i < editDistanceTable.length; i++){
+            for(int j = 0; j < editDistanceTable[0].length; j++){
                 editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[j], editDistanceTable);
             }
-            if(breakFlag){
-                editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1] = threshold + 1;
-                break;
-            }
         }
-        System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
+        //System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
         return editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1];
     }
 
@@ -96,6 +86,9 @@ private int threshold;
                 if(editDistanceArr[currentEditDistance] == null) {
                     editDistanceArr[currentEditDistance] = new ArrayList<String>();
                 }
+                if(currentEditDistance == 0) {
+                    return null;
+                }
                 editDistanceArr[currentEditDistance].add(dict[i]);
             }
         }
@@ -111,8 +104,8 @@ private int threshold;
                 finalReturned.add(editDistanceArr[i].get(j));
             }
         }
-        System.out.println("threshold "+threshold);
-        System.out.println(finalReturned);
+        //System.out.println("threshold "+threshold);
+        //System.out.println(finalReturned);
         String[] retArr = finalReturned.toArray(new String[0]);
         //converts it to an array and return
         return retArr;
@@ -142,6 +135,26 @@ private int threshold;
         }
         catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public static void main(String[] args) {
+        // Code to be executed
+        Scanner keyScanner = new Scanner(System.in);
+        String[] myDict = loadDictionary("large");
+        Autocorrect myCorrect = new Autocorrect(myDict,4);
+        String typed = "";
+        String[] resultArr = null;
+        while(true) {
+            System.out.print("Enter a word: ");
+            typed = keyScanner.next();
+            resultArr = myCorrect.runTest(typed);
+            System.out.println("You typed "+typed);
+            if(resultArr != null) {
+                System.out.println("Did you mean ");
+                for(int i= 0; i < resultArr.length; i++) {
+                    System.out.println(resultArr[i]);
+                }
+            }
         }
     }
 }

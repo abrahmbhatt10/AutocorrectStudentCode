@@ -33,15 +33,12 @@ private int threshold;
         int[][] editDistanceTable = new int[typed.length() + 1][dictWord.length() + 1];
         char[] typedChar = new char[typed.length() + 1];
         char[] dictWordChar = new char[dictWord.length() + 1];
-        // I figured out how to do below line from stackoverflow.com "How to represent empty char in java character class"
-        typedChar[0] = '\0';
-        for(int i = 0; i < typed.length(); i++){
-            typedChar[i + 1] = typed.charAt(i);
-        }
-        dictWordChar[0] = '\0';
-        for(int i = 0; i < dictWord.length(); i++){
-            dictWordChar[i + 1] = dictWord.charAt(i);
-        }
+        typed = " " + typed;
+        dictWord = " " + dictWord;
+        // Below converts both words to char arrays.
+        typedChar = typed.toCharArray();
+        dictWordChar = dictWord.toCharArray();
+        // Below fills up the 2-d array edit distance table.
         for(int i = 0; i < editDistanceTable.length; i++){
             for(int j = 0; j < editDistanceTable[0].length; j++){
                 editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[j], editDistanceTable);

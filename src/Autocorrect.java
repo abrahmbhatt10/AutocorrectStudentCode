@@ -41,9 +41,18 @@ private int threshold;
         // Below fills up the 2-d array edit distance table.
         int i;
         int j;
+        boolean breakFlag = false;
         for(i = 0; i < editDistanceTable.length; i++){
             for(j = 0; j < editDistanceTable[0].length; j++){
+                if((j > 0) && (i > 0) && (editDistanceTable[i][j - 1] > threshold) && (editDistanceTable[i - 1][j] > threshold) && (editDistanceTable[i - 1][j - 1] > threshold)){
+                    breakFlag = true;
+                    break;
+                }
                 editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[j], editDistanceTable);
+            }
+            if(breakFlag){
+                editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1] = threshold + 1;
+                break;
             }
         }
         //System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);

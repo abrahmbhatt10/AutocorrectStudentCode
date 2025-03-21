@@ -42,9 +42,13 @@ private int threshold;
         for(int i = 0; i < editDistanceTable.length; i++){
             for(int j = 0; j < editDistanceTable[0].length; j++){
                 editDistanceTable[i][j] = getTabEditDistance(i, j, typedChar[i], dictWordChar[j], editDistanceTable);
+                if(editDistanceTable[i][j] > threshold){
+                    editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1] = threshold + 1;
+                    break;
+                }
             }
         }
-        System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
+        //System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
         return editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1];
     }
 

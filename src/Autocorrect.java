@@ -55,7 +55,7 @@ private int threshold;
                 break;
             }
         }
-        //System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
+        System.out.println(dictWord+" "+editDistanceTable[editDistanceTable.length-1][editDistanceTable[0].length-1]);
         return editDistanceTable[editDistanceTable.length - 1][editDistanceTable[0].length - 1];
     }
 

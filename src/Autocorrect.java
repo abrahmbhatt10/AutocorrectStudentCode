@@ -104,10 +104,8 @@ private int threshold;
                 finalReturned.add(editDistanceArr[i].get(j));
             }
         }
-        //System.out.println("threshold "+threshold);
-        //System.out.println(finalReturned);
-        String[] retArr = finalReturned.toArray(new String[0]);
         //converts it to an array and return
+        String[] retArr = finalReturned.toArray(new String[0]);
         return retArr;
     }
 

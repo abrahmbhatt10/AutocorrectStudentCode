@@ -15,3 +15,9 @@ This is based on a threshold set in the code by default to 4.
 It goes in a while loop and keeps asking for new words.
 
 Autocorrect tester tests the autocorrect functions. 
+
+# Description of the time complexity of the major methods involved
+Initializing the data structures -> O(n)
+Generating all matching candidates for a given misspelled word -> O(n^2)
+Evaluating an individual candidate String to find its edit distance -> O(1)
+…as well as an analysis of any other major components of your algorithm. -> O(n)

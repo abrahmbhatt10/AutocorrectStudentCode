@@ -12,9 +12,9 @@ Name: Agastya Brahmbhatt
 | March 17 |  11 - 11:30   |                                                                                         I tried different functions. These functions could add. They could also delete. |
 | March 20 |   5 - 5:30    |                                                                         I implemented using Mr. Blick's method. I used tabulation. I realized I was skipping threshold. |
 | March 20 |   5:30 - 6    |                                     I changed to check for threshold + 1. I corrected code when there was no match for a given threshold. I did this to check for null. |
-| March 20 |   6 - 6:30    |                                                                                                                                                                         |
-| March 20 |   6:30 - 7    |                                                                                                                                                                         |
-| March 20 |   7 - 7:30    |                                                                                                                                                                         |
+| March 20 |   6 - 6:30    |                                                         I tried to make it efficient. I did this by skipping if a table value exceeded threshold. This was not working. |
+| March 20 |   6:30 - 7    |                                                         I debugged. I found boundary values exceeding thresholds even when final value was low. The tests were failing. |
+| March 20 |   7 - 7:30    |    I checked only in the middle of the square when row = threshold and column = threshold. This was passing. However, I was not convinced it would catch all the cases. |
 | March 20 |   7:30 - 8    |                                                                                                                                                                         |
 | March 24 |   8:30 - 9    |                                                                                                                                                                         |
 | March 24 |   9 - 9:30    |                                                                                                                                                                         |

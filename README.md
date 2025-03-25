@@ -7,3 +7,11 @@ A tester file has been provided for you. It utilizes junit tests.
 To use this test file, run either the entire thing or individual tests (one at a time).
 There are five test cases, each of which will load data from [test number].txt, which is in the
 test_files directory.
+
+# READ_ME Describing Project at a high level
+Autocorrect has a main function that accepts user input from the terminal.  
+It will look at the user's word and suggest all possible word corrections within a given threshold.
+This is based on a threshold set in the code by default to 4.
+It goes in a while loop and keeps asking for new words.
+
+Autocorrect tester tests the autocorrect functions. 

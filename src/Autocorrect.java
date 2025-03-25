@@ -138,6 +138,7 @@ private int threshold;
     public static void main(String[] args) {
         // Code to be executed
         Scanner keyScanner = new Scanner(System.in);
+        // loads dictionary
         String[] myDict = loadDictionary("large");
         Autocorrect myCorrect = new Autocorrect(myDict,4);
         String typed = "";
@@ -145,10 +146,12 @@ private int threshold;
         while(true) {
             System.out.print("Enter a word: ");
             typed = keyScanner.next();
+            //Below runs test on keyboard input
             resultArr = myCorrect.runTest(typed);
             System.out.println("You typed "+typed);
             if(resultArr != null) {
                 System.out.println("Did you mean ");
+                // Below prints out all the possible words sorted by threshold and then alphabetically.
                 for(int i= 0; i < resultArr.length; i++) {
                     System.out.println(resultArr[i]);
                 }

@@ -10,8 +10,8 @@ Name: Agastya Brahmbhatt
 | March 17 |  10 - 10:30   |                                                                                     I brainstormed. I tried to figure out an algorithm. The algorithm would skip words. |
 | March 17 |  10:30 - 11   | The mismatched word could also have the first letter mismatched. It could also be close in edit distance. Skipping based on sorting of dictionary words wasn't working. |
 | March 17 |  11 - 11:30   |                                                                                         I tried different functions. These functions could add. They could also delete. |
-| March 20 |   5 - 5:30    |                                                                                                             I implemented using Mr. Blick's method. I used tabulation.  |
-| March 20 |   5:30 - 6    |                                                                                                                                                                         |
+| March 20 |   5 - 5:30    |                                                                         I implemented using Mr. Blick's method. I used tabulation. I realized I was skipping threshold. |
+| March 20 |   5:30 - 6    |                                     I changed to check for threshold + 1. I corrected code when there was no match for a given threshold. I did this to check for null. |
 | March 20 |   6 - 6:30    |                                                                                                                                                                         |
 | March 20 |   6:30 - 7    |                                                                                                                                                                         |
 | March 20 |   7 - 7:30    |                                                                                                                                                                         |

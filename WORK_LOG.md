@@ -15,9 +15,9 @@ Name: Agastya Brahmbhatt
 | March 20 |   6 - 6:30    |                                                         I tried to make it efficient. I did this by skipping if a table value exceeded threshold. This was not working. |
 | March 20 |   6:30 - 7    |                                                         I debugged. I found boundary values exceeding thresholds even when final value was low. The tests were failing. |
 | March 20 |   7 - 7:30    |    I checked only in the middle of the square when row = threshold and column = threshold. This was passing. However, I was not convinced it would catch all the cases. |
-| March 20 |   7:30 - 8    |                                                                                                                                                                         |
-| March 24 |   8:30 - 9    |                                                                                                                                                                         |
-| March 24 |   9 - 9:30    |                                                                                                                                                                         |
+| March 20 |   7:30 - 8    |                                                                                    I sent Mr. Blick an email. I did this to get a hint. The hint was to implement Trie. |
+| March 24 |   8:30 - 9    |                                                                                                      I did the homework requirements. I wrote comments. I did work log. |
+| March 24 |   9 - 9:30    |                                              I calculated the time space complexity. I wrote the read me file. I double checked to make sure my code was working still. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.

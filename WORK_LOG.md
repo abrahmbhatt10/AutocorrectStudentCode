@@ -7,6 +7,17 @@ Name: Agastya Brahmbhatt
 | March 11 | 9:30 - 10:pm  |           I managed to code in a way to return removals. I did this by doing a nested for loop. It returns all the chars in typed that aren't in dictWord. |
 | March 17 |  9 - 9:30 pm  | I tried debugging. I realized that I had to check whether or not the arraylists in the array were null. I also had to make the table have ints, not chars. |
 | March 17 |  9:30 - 10pm  |                                                                           I debugged some more. I found that all the tests were passing. I wrote comments. |
+| March 17 |  10 - 10:30   |                                                                                                                                                            |
+| March 17 |  10:30 - 11   |                                                                                                                                                            |
+| March 17 |  11 - 11:30   |                                                                                                                                                            |
+| March 20 |   5 - 5:30    |                                                                                                                                                            |
+| March 20 |   5:30 - 6    |                                                                                                                                                            |
+| March 20 |   6 - 6:30    |                                                                                                                                                            |
+| March 20 |   6:30 - 7    |                                                                                                                                                            |
+| March 20 |   7 - 7:30    |                                                                                                                                                            |
+| March 20 |   7:30 - 8    |                                                                                                                                                            |
+| March 24 |   8:30 - 9    |                                                                                                                                                            |
+| March 24 |   9 - 9:30    |                                                                                                                                                            |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
